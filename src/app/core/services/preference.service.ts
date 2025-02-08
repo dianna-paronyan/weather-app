@@ -16,8 +16,4 @@ export class PreferenceService {
     return this.preferences;
   }
 
-  delPref(){
-    this.preferences = {city:''}
-    return this.preferences;
-  }
 }

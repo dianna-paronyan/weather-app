@@ -115,7 +115,7 @@ export class MultiStepFormComponent {
     this.preferences = { ...this.preferences, ...data };
   }
   confirmPreferences() {
-    this.updatePreferences({city: this.selectedCity});
+    this.updatePreferences({city: this.selectedCity, chartType: this.displayOptions.chartType});
     this.router.navigate(['/dashboard']);
     this.preferencesService.savePreferences(this.preferences)
   }

@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
   weatherData: WeatherModel[] = [];
   filteredCities: any[] = [];
   preferences!: PreferenceModel;
+  preferencesChartType: any;
   selectedCity!: string;
   chartData: any;
   chartOptions: any;
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit {
     this.getWeatherData();
     this.preferences = this.preferencesService.getPreferences();
     this.selectedCity = this.preferences?.city;
+    this.preferencesChartType = this.preferences?.chartType || 'line';
     if (this.selectedCity) {
       this.showForecast();
     }
@@ -136,6 +138,8 @@ export class DashboardComponent implements OnInit {
   }
 
   creteChart(labels: string[], temperatures: number[]) {
+    const chartType = this.preferencesChartType;
+
     this.chartData = {
       labels: labels.slice(0, 16),
       datasets: [
@@ -143,11 +147,12 @@ export class DashboardComponent implements OnInit {
           label: 'Temperature (°C)',
           data: temperatures.slice(0, 16),
           borderColor: '#42A5F5',
-          backgroundColor: 'rgba(66,165,245,0.2)',
-          fill: true,
+          backgroundColor: chartType === 'bar' ? '#42A5F5' : 'rgba(66,165,245,0.2)',
+          fill: chartType !== 'bar',
         },
       ],
     };
+
     this.chartOptions = {
       responsive: true,
       plugins: {
@@ -155,20 +160,36 @@ export class DashboardComponent implements OnInit {
           position: 'top',
         },
       },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Time',
+      scales: chartType === 'bar'
+        ? {
+          x: {
+            title: {
+              display: true,
+              text: 'Time',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Temperature (°C)',
+            },
+          },
+        }
+        : {
+          x: {
+            title: {
+              display: true,
+              text: 'Time',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Temperature (°C)',
+            },
           },
         },
-        y: {
-          title: {
-            display: true,
-            text: 'Temperature (°C)',
-          },
-        },
-      },
+      type: chartType,
     };
 
     return this.chartData;

@@ -1,6 +1,7 @@
 <p-steps [model]="steps" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
 
 <!-- Step 1: City Selection -->
+
 <div *ngIf="activeIndex === 0">
   <div class="card flex justify-content-center">
     <p-autoComplete
@@ -15,6 +16,7 @@
 </div>
 
 <!-- Step 2: Metrics Preferences -->
+
 <div *ngIf="activeIndex === 1">
   <p>Select the weather getMetrics you want to display:</p>
   <div class="field-checkbox" *ngFor="let metric of metrics">
@@ -31,10 +33,10 @@
 </div>
 
 <!-- Step 3: Display Options -->
+
 <div *ngIf="activeIndex === 2">
   <p>Choose how you want the data displayed:</p>
 
-  <!-- Layout Options -->
   <p>Layout:</p>
   <div class="field-radiobutton">
     <p-radioButton
@@ -58,13 +60,14 @@
   </div>
 
   <!-- Chart Type Options -->
+
   <p>Chart Type:</p>
   <div class="field-radiobutton">
     <p-radioButton
       name="chartType"
       [(ngModel)]="displayOptions.chartType"
       inputId="line"
-      value="Line"
+      value="line"
       (onClick)="onDisplayOptionsComplete()"
     ></p-radioButton>
     <label>Line Chart</label>
@@ -74,7 +77,7 @@
       name="chartType"
       [(ngModel)]="displayOptions.chartType"
       inputId="bar"
-      value="Bar"
+      value="bar"
       (onClick)="onDisplayOptionsComplete()"
     ></p-radioButton>
     <label>Bar Chart</label>
@@ -86,6 +89,7 @@
 </div>
 
 <!-- Step 4: Confirmation -->
+
 <div *ngIf="activeIndex === 3">
   <p>Confirmation Summary:</p>
   <ul>
