@@ -1,0 +1,112 @@
+<p-steps [model]="steps" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+
+<!-- Step 1: City Selection -->
+<div *ngIf="activeIndex === 0">
+  <div class="card flex justify-content-center">
+    <p-autoComplete
+      [(ngModel)]="selectedCity"
+      [dropdown]="true"
+      [suggestions]="filteredCities"
+      (completeMethod)="filterCountry($event)"
+      (onSelect)="onSelectCity()"
+      placeholder="Select a city"
+    ></p-autoComplete>
+  </div>
+</div>
+
+<!-- Step 2: Metrics Preferences -->
+<div *ngIf="activeIndex === 1">
+  <p>Select the weather getMetrics you want to display:</p>
+  <div class="field-checkbox" *ngFor="let metric of metrics">
+    <p-checkbox
+      [(ngModel)]="metric.selected"
+      [binary]="true"
+      (onChange)="onMetricsSelectionComplete()"
+    ></p-checkbox>
+    <label>{{ metric.name }}</label>
+  </div>
+  <p *ngIf="areMetricsValid()">
+    Selected metric: {{ getSelectedMetrics() }}
+  </p>
+</div>
+
+<!-- Step 3: Display Options -->
+<div *ngIf="activeIndex === 2">
+  <p>Choose how you want the data displayed:</p>
+
+  <!-- Layout Options -->
+  <p>Layout:</p>
+  <div class="field-radiobutton">
+    <p-radioButton
+      name="layout"
+      [(ngModel)]="displayOptions.layout"
+      inputId="table"
+      value="Table"
+      (onClick)="onDisplayOptionsComplete()"
+    ></p-radioButton>
+    <label>Table View</label>
+  </div>
+  <div class="field-radiobutton">
+    <p-radioButton
+      name="layout"
+      [(ngModel)]="displayOptions.layout"
+      inputId="card"
+      value="Card"
+      (onClick)="onDisplayOptionsComplete()"
+    ></p-radioButton>
+    <label>Card View</label>
+  </div>
+
+  <!-- Chart Type Options -->
+  <p>Chart Type:</p>
+  <div class="field-radiobutton">
+    <p-radioButton
+      name="chartType"
+      [(ngModel)]="displayOptions.chartType"
+      inputId="line"
+      value="Line"
+      (onClick)="onDisplayOptionsComplete()"
+    ></p-radioButton>
+    <label>Line Chart</label>
+  </div>
+  <div class="field-radiobutton">
+    <p-radioButton
+      name="chartType"
+      [(ngModel)]="displayOptions.chartType"
+      inputId="bar"
+      value="Bar"
+      (onClick)="onDisplayOptionsComplete()"
+    ></p-radioButton>
+    <label>Bar Chart</label>
+  </div>
+
+  <p *ngIf="areDisplayOptionsValid()">
+    Selected options: Layout - {{ displayOptions.layout }}, Chart Type - {{ displayOptions.chartType }}
+  </p>
+</div>
+
+<!-- Step 4: Confirmation -->
+<div *ngIf="activeIndex === 3">
+  <p>Confirmation Summary:</p>
+  <ul>
+    <li><strong>City:</strong> {{ selectedCity }}</li>
+    <li><strong>Metrics:</strong> {{ getSelectedMetrics().join(', ') }}</li>
+    <li><strong>Layout:</strong> {{ displayOptions.layout }}</li>
+    <li><strong>Chart Type:</strong> {{ displayOptions.chartType }}</li>
+  </ul>
+  <div class="flex justify-content-between mt-3">
+    <p-button
+      pButton
+      label="Back"
+      icon="pi pi-arrow-left"
+      (click)="activeIndex = activeIndex - 1"
+      class="mr-2"
+    ></p-button>
+    <p-button
+      pButton
+      label="Confirm"
+      icon="pi pi-check"
+      (click)="confirmPreferences()"
+    ></p-button>
+  </div>
+</div>
