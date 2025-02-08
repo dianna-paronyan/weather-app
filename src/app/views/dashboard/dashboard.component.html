@@ -1,1 +1,80 @@
-<p>dashboard works!</p>
+<div class="container">
+  <p-iconField iconPosition="left">
+    <p-inputIcon styleClass="pi pi-search"/>
+    <input type="text" pInputText placeholder="Enter city" (input)="filterCities($event)"/>
+  </p-iconField>
+
+  <p-table
+    [value]="filteredCities"
+    styleClass="p-datatable-gridlines"
+    [tableStyle]="{ 'max-width': '70rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>City</th>
+        <th>
+          Temperature (°C)
+          <i (click)="sortCitiesBy('temperature')" class="pi pi-sort-alt"></i>
+        </th>
+        <th>
+          Humidity (%)
+          <i (click)="sortCitiesBy('humidity')" class="pi pi-sort-alt"></i>
+        </th>
+        <th>Weather Condition</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-city>
+      <tr>
+        <td>{{ city.city }}</td>
+        <td>{{ city.temperature }}</td>
+        <td>{{ city.humidity }}</td>
+        <td>{{ city.weatherCondition }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dropdown
+    [options]="cities"
+    [(ngModel)]="selectedCity"
+    placeholder="Select a City"
+    (onChange)="showForecast()"
+  />
+
+  <p-chart
+    type="line"
+    [data]="chartData"
+    [options]="chartOptions"
+    style="max-width: 700px;"
+  ></p-chart>
+
+  <div class="grid gap-4" *ngIf="selectedCity">
+    <div class="col-12 md:col-4">
+      <p-card>
+        <ng-template pTemplate="title">Highest Temperature</ng-template>
+        <ng-template pTemplate="content">
+          <div class="text-xl text-red-500 font-bold">{{ highestTemp }} °C</div>
+        </ng-template>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-4">
+      <p-card>
+        <ng-template pTemplate="title">Lowest Temperature</ng-template>
+        <ng-template pTemplate="content">
+          <div class="text-xl text-blue-500 font-bold">{{ lowestTemp }} °C</div>
+        </ng-template>
+      </p-card>
+    </div>
+
+    <div class="col-12 md:col-4">
+      <p-card>
+        <ng-template pTemplate="title">Average Humidity</ng-template>
+        <ng-template pTemplate="content">
+          <div class="text-xl text-green-500 font-bold">{{ averageHumidity }}%</div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+
+</div>
+
+
