@@ -13,6 +13,19 @@ Change to the project directory:
 ```
 cd ./weather-app
 ```
+Install dependencies::
+```
+npm install
+```
+Run the application:
+```
+ng serve
+```
+Open browser and navigate to:
+```
+http://localhost:4200
+```
+
 ## Features
 
 ### Multi-Step Form
