@@ -1,27 +1,48 @@
 # WeatherApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+## Description
+This application simplifies dashboard customization, enabling users to select metrics, adjust layout and display options, and apply changes dynamically.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Clone the repository:
+```
+git clone https://github.com/dianna-paronyan/weather-app.git
+```
+Change to the project directory:
+```
+cd ./weather-app
+```
+## Features
 
-## Code scaffolding
+### Multi-Step Form
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Step 1: Users can select their preferred metrics for the dashboard.
 
-## Build
+- Step 2: Choose display options, including layout and chart type.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Step 3: Review selections before confirming.
 
-## Running unit tests
+## State Management
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- User preferences are stored in a centralized service to ensure seamless navigation and data persistence.
 
-## Running end-to-end tests
+### Real-Time Updates
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Changes to preferences dynamically update the dashboard upon confirmation.
 
-## Further help
+### Chart Visualizations
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Charts rendered using PrimeNG and Angular for effective data representation.
+
+### PrimeFlex Integration
+
+- The application utilizes PrimeFlex for styling and layout management, ensuring a responsive design.
+
+## Dependencies
+
+- Angular
+
+- PrimeNG
+
+- PrimeFlex
