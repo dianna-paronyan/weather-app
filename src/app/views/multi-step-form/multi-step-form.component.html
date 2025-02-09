@@ -2,8 +2,8 @@
 
 <!-- Step 1: City Selection -->
 
-<div *ngIf="activeIndex === 0">
-  <div class="card flex justify-content-center">
+<div *ngIf="activeIndex === 0" class="mt-8">
+  <div class="card">
     <p-autoComplete
       [(ngModel)]="selectedCity"
       [dropdown]="true"
@@ -17,7 +17,7 @@
 
 <!-- Step 2: Metrics Preferences -->
 
-<div *ngIf="activeIndex === 1">
+<div *ngIf="activeIndex === 1" class="mt-8">
   <p>Select the weather getMetrics you want to display:</p>
   <div class="field-checkbox" *ngFor="let metric of metrics">
     <p-checkbox
@@ -27,14 +27,17 @@
     ></p-checkbox>
     <label>{{ metric.name }}</label>
   </div>
-  <p *ngIf="areMetricsValid()">
-    Selected metric: {{ getSelectedMetrics() }}
+  <p
+    *ngIf="areMetricsValid()"
+    class="text-sm md:text-base font-medium mt-3 text-primary">
+    Selected metric: <span class="font-bold text-secondary">{{ getSelectedMetrics() }}</span>
   </p>
+
 </div>
 
 <!-- Step 3: Display Options -->
 
-<div *ngIf="activeIndex === 2">
+<div *ngIf="activeIndex === 2" class="mt-8">
   <p>Choose how you want the data displayed:</p>
 
   <p>Layout:</p>
@@ -83,22 +86,27 @@
     <label>Bar Chart</label>
   </div>
 
-  <p *ngIf="areDisplayOptionsValid()">
-    Selected options: Layout - {{ displayOptions.layout }}, Chart Type - {{ displayOptions.chartType }}
+  <p
+    *ngIf="areDisplayOptionsValid()"
+    class="text-sm md:text-base font-medium mt-3 text-primary">
+    Selected options:
+    <span class="font-bold text-secondary">Layout - {{ displayOptions.layout }}</span>,
+    <span class="font-bold text-secondary">Chart Type - {{ displayOptions.chartType }}</span>
   </p>
+
 </div>
 
 <!-- Step 4: Confirmation -->
 
-<div *ngIf="activeIndex === 3">
+<div *ngIf="activeIndex === 3" class="mt-8">
   <p>Confirmation Summary:</p>
-  <ul>
+  <ul class="flex flex-column gap-2">
     <li><strong>City:</strong> {{ selectedCity }}</li>
     <li><strong>Metrics:</strong> {{ getSelectedMetrics().join(', ') }}</li>
     <li><strong>Layout:</strong> {{ displayOptions.layout }}</li>
     <li><strong>Chart Type:</strong> {{ displayOptions.chartType }}</li>
   </ul>
-  <div class="flex justify-content-between mt-3">
+  <div class="flex justify-content-between mt-5">
     <p-button
       pButton
       label="Back"

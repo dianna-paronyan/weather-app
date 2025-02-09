@@ -112,12 +112,12 @@ export class MultiStepFormComponent {
     return this.metrics.filter(metric => metric.selected).map(metric => metric.name);
   }
   updatePreferences(data: PreferenceModel) {
-    this.preferences = { ...this.preferences, ...data };
+    this.preferences = data;
   }
   confirmPreferences() {
     this.updatePreferences({city: this.selectedCity, chartType: this.displayOptions.chartType});
     this.router.navigate(['/dashboard']);
-    this.preferencesService.savePreferences(this.preferences)
+    this.preferencesService.savePreferences(this.preferences);
   }
 
 }

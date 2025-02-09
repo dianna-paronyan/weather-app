@@ -46,12 +46,12 @@
     style="max-width: 700px;"
   ></p-chart>
 
-  <div class="grid gap-4" *ngIf="selectedCity">
+  <div class="grid gap-4 mt-3" *ngIf="selectedCity">
     <div class="col-12 md:col-4">
       <p-card>
         <ng-template pTemplate="title">Highest Temperature</ng-template>
         <ng-template pTemplate="content">
-          <div class="text-xl text-red-500 font-bold">{{ highestTemp }} °C</div>
+          <div class="text-base text-red-500">{{ highestTemp }} °C</div>
         </ng-template>
       </p-card>
     </div>
@@ -60,7 +60,7 @@
       <p-card>
         <ng-template pTemplate="title">Lowest Temperature</ng-template>
         <ng-template pTemplate="content">
-          <div class="text-xl text-blue-500 font-bold">{{ lowestTemp }} °C</div>
+          <div class="text-base text-blue-500">{{ lowestTemp }} °C</div>
         </ng-template>
       </p-card>
     </div>
@@ -69,7 +69,7 @@
       <p-card>
         <ng-template pTemplate="title">Average Humidity</ng-template>
         <ng-template pTemplate="content">
-          <div class="text-xl text-green-500 font-bold">{{ averageHumidity }}%</div>
+          <div class="text-base text-green-500">{{ averageHumidity }}%</div>
         </ng-template>
       </p-card>
     </div>

@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit {
   getMetrics() {
     this.weatherService.getForecast(this.selectedCity).subscribe({
       next: (data: any) => {
-        const temperatures = data.list.map((item: any) => item.main.temp);
+        const temperatures = data.list.map((item: any) =>  Math.round(item.main.temp));
         const humidities = data.list.map((item: any) => item.main.humidity);
 
         this.highestTemp = Math.round(Math.max(...temperatures));
